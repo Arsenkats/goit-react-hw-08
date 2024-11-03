@@ -1,11 +1,19 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./LoginForm.module.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/operations";
 const initialValues = {
   email: "",
   password: "",
 };
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+
+  const handleLogin = (values, options) => {
+    dispatch(login(values));
+    options.resetForm();
+  };
   const checkValues = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
@@ -21,7 +29,11 @@ const RegistrationForm = () => {
   });
 
   return (
-    <Formik initialValues={initialValues} validationSchema={checkValues}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={checkValues}
+      onSubmit={handleLogin}
+    >
       <Form className={css.form}>
         <label className={css.label}>
           Email
