@@ -1,12 +1,20 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./RegistrationForm.module.css";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
 const initialValues = {
   name: "",
   email: "",
   password: "",
 };
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, options) => {
+    dispatch(register(values));
+    options.resetForm();
+  };
   const checkValues = Yup.object().shape({
     name: Yup.string()
       .min(3, "Name should be at least 3 characters")
@@ -27,7 +35,11 @@ const RegistrationForm = () => {
   });
 
   return (
-    <Formik initialValues={initialValues} validationSchema={checkValues}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={checkValues}
+      onSubmit={handleSubmit}
+    >
       <Form className={css.form}>
         <label className={css.label}>
           Name

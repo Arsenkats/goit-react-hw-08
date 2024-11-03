@@ -9,6 +9,7 @@ const initialValues = {
 };
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
   const onSubmit = (values, options) => {
     const newContact = {
       name: values.name,
@@ -29,7 +30,6 @@ const ContactForm = () => {
       .max(50, "Number should be at most 50 characters")
       .required("Number is required"),
   });
-  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={initialValues}
