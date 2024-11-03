@@ -1,31 +1,33 @@
-import ContactList from "./components/ContactList/ContactList";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactForm from "./components/ContactForm/ContactForm";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchContacts } from "./redux/contacts/operations";
-import { selectLoading } from "./redux/contacts/selectors";
-import Loader from "./components/Loader/Loader";
-import { useSelector } from "react-redux";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import ContactsPage from "./pages/ContactsPage/ContactsPage";
+import HomePage from "./pages/HomePage/HomePage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 const App = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchContacts());
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      {loading ? <Loader /> : <ContactList />}
+    <>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/contacts' element={<ContactsPage />} />
+        </Route>
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
       <ToastContainer position='top-right' autoClose={3000} />
-    </div>
+    </>
   );
 };
 
