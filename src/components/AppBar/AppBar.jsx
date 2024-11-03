@@ -7,7 +7,7 @@ import s from "./AppBar.module.css";
 
 const AppBar = () => {
   // const isAuthenticated = useSelector(selectIsAuthenticated);
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   return (
     <header className={s.headerContainer}>
       <Navigation />
