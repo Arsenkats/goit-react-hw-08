@@ -1,20 +1,16 @@
-// import { useDispatch } from "react-redux";
-// import { logOut } from "./redux/auth/operations";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/operations";
 import { NavLink } from "react-router-dom";
 import s from "./UserMenu.module.css";
 
 const UserMenu = () => {
-  //   const dispatch = useDispatch();
-
-  //   const handleLogout = () => {
-  //     dispatch(logOut());
-  //   };
+  const dispatch = useDispatch();
 
   return (
     <div className={s.navCon}>
       <NavLink to='/contacts'>My contacts</NavLink>
-      {/* onClick={handleLogout} */}
-      <button>Logout</button>
+
+      <button onClick={() => dispatch(logout())}>Logout</button>
     </div>
   );
 };

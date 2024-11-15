@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, deleteContact, addContact } from './operations';
 import { toast } from 'react-toastify';
+import { logout} from "../auth/operations";
 
 const initialState = {
     contacts: {
@@ -53,7 +54,8 @@ const slice = createSlice({
                 state.contacts.loading = false;
                 state.contacts.error = action.error.message;
                 toast.error(`Failed to add contact: ${action.error.message}`);
-            });
+            })
+            .addCase(logout.fulfilled, () => initialState);
     }
 });
 
