@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectFilteredContacts } from "../../redux/contacts/selectors";
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const ContactList = () => {
   const dispatch = useDispatch();
   const filteredContacts = useSelector(selectFilteredContacts);
-
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (isLoggedIn && filteredContacts.length === 0) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, isLoggedIn, filteredContacts.length]);
 
   return (
     <ul className={css.contactList}>
