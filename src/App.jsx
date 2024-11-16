@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchContacts } from "./redux/contacts/operations";
+// import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+// import { fetchContacts } from "./redux/contacts/operations";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,12 +13,6 @@ import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
     <>
       <Routes>
