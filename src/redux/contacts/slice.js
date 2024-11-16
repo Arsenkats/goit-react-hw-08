@@ -17,17 +17,16 @@ const slice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(fetchContacts.pending, (state) => {
-                state.contacts.loading = true;
-                state.contacts.error = null;
+              state.contacts.loading = true;
+              state.contacts.error = null;
             })
             .addCase(fetchContacts.fulfilled, (state, action) => {
-                state.contacts.items = action.payload;
-                state.contacts.loading = false;
+              state.contacts.items = action.payload;
+              state.contacts.loading = false;
             })
             .addCase(fetchContacts.rejected, (state, action) => {
-                state.contacts.loading = false;
-                state.contacts.error = action.error.message;
-                toast.error(`Failed to load contacts: ${action.error.message}`);
+              state.contacts.loading = false;
+              state.contacts.error = action.error.message;
             })
             .addCase(deleteContact.pending, (state) => {
                 state.contacts.loading = true;

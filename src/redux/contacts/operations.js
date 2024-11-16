@@ -5,13 +5,15 @@ import { goitApi } from '../auth/operations';
 
 
 export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async (_, thunkApi) => {
-    try {
-        const { data } = await goitApi.get('/contacts');
-        return data;
-    } catch (error) {
-        return thunkApi.rejectWithValue(error.message);
-    }
+  try {
+    const { data } = await goitApi.get('/contacts');
+    return data;
+  } catch (error) {
+    console.error('Error fetching contacts:', error.message);
+    return thunkApi.rejectWithValue(error.message);
+  }
 });
+
 
 export const deleteContact = createAsyncThunk('contacts/deleteContact', async (id, thunkApi) => {
     try {
